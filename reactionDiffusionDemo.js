@@ -28,11 +28,11 @@ function setup() {
   
   var restartButton = createButton("Restart with new parameters");
   restartButton.mousePressed(restartSketch);
-  createP('');
+  restartButton.position(0,670);
   var resetButton = createButton("Reset");
   resetButton.mousePressed(resetSketch);
+  resetButton.position(0,700);
   frameRate(150);
-  createP('');
 }
 
 function updatedA(){
