@@ -11,22 +11,28 @@ var feed = 0.055;
 var k = 0.062;
 
 function setup() {
-  createCanvas(1001, 401);
+  canvas = createCanvas(1001, 401);
+  canvas.position(0,260);
   textSize(15);
   noStroke();
 
-  dASlider = createSlider(0.5, 1.5, 1, 0.001);
-  dASlider.position(gridWidth, 110 + 140);
-  dBSlider = createSlider(0, 1, 0.5, 0.001);
-  dBSlider.position(gridWidth, 240 + 140); 
+  dASlider = createSlider(0.8, 1.2, 1, 0.001);
+  dASlider.position(gridWidth, 260 + 110);
+  dBSlider = createSlider(0, 0.7, 0.5, 0.001);
+  dBSlider.position(gridWidth, 260 + 240); 
 
   resetSketch();
   pixelDensity(1);
   createP('');
   
+  
+  var restartButton = createButton("Restart with new parameters");
+  restartButton.mousePressed(restartSketch);
+  createP('');
   var resetButton = createButton("Reset");
   resetButton.mousePressed(resetSketch);
   frameRate(150);
+  createP('');
 }
 
 function updatedA(){
@@ -39,12 +45,7 @@ function updatedB(){
 
 function draw() {
   background(255);
-  //fill(0,255,0);
-  //ellipse(940,150,50,50);
-  //fill(255,0,0);
-  //ellipse(940,250,50,50);
-  //fill(0);
-  //line(965,
+
   for (var x = 1; x < gridWidth - 1; x++) {
     for (var y = 1; y < gridHeight - 1; y++) {
       var a = grid[x][y].a;
@@ -90,6 +91,39 @@ function resetSketch(){
   
   dASlider.value(1);
   dBSlider.value(0.5);
+  updatedA();
+  updatedB();
+  dASlider.input(updatedA);
+  dBSlider.input(updatedB);
+
+  grid = [];
+  next = [];
+  for (var x = 0; x < gridWidth; x++) {
+    grid[x] = [];
+    next[x] = [];
+    for (var y = 0; y < gridHeight; y++) {
+      grid[x][y] = {
+        a: 1,
+        b: 0
+      };
+      next[x][y] = {
+        a: 1,
+        b: 0
+      };
+    }
+  }
+ 
+  for (var i = 0; i < gridWidth; i++) {
+    for (var j = 0; j < gridHeight; j++) {
+      if(sqrt(((200-i)*(200-i))+((200-j)*(200-j))) < 20){
+        grid[i][j].b = 1;
+      }
+    }
+  }
+}
+
+function restartSketch(){
+  
   updatedA();
   updatedB();
   dASlider.input(updatedA);
