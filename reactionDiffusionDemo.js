@@ -12,14 +12,14 @@ var k = 0.062;
 
 function setup() {
   canvas = createCanvas(1001, 401);
-  canvas.position(0,260);
+  canvas.position(0,280);
   textSize(15);
   noStroke();
 
   dASlider = createSlider(0.8, 1.2, 1, 0.001);
-  dASlider.position(gridWidth, 260 + 110);
+  dASlider.position(gridWidth, 280 + 110);
   dBSlider = createSlider(0, 0.7, 0.5, 0.001);
-  dBSlider.position(gridWidth, 260 + 240); 
+  dBSlider.position(gridWidth, 280 + 240); 
 
   resetSketch();
   pixelDensity(1);
@@ -28,10 +28,10 @@ function setup() {
   
   var restartButton = createButton("Restart with new parameters");
   restartButton.mousePressed(restartSketch);
-  restartButton.position(0,670);
+  restartButton.position(0,690);
   var resetButton = createButton("Reset");
   resetButton.mousePressed(resetSketch);
-  resetButton.position(0,700);
+  resetButton.position(0,720);
   frameRate(150);
 }
 
